@@ -25,8 +25,15 @@ include("config/bd.php");?>
         </div>
     </div>    
 
-    <table class="table table-bordered">
-     <thead>
+    <table id="partidos" class="table table-bordered">
+
+    <?php
+    $base = "politicaargentina";
+    $conexion = mysqli_connect("localhost","root","", $base);
+    $consulta = "SELECT * from partidospoliticos";
+    $consulta = mysqli_query($conexion, $consulta);
+
+    echo '<thead>
         <tr>
             <th>Partido_ID</th>
             <th>NombrePartido</th>
@@ -36,13 +43,57 @@ include("config/bd.php");?>
             <th>LiderActual</th>
             <th>SitioWeb</th>   
         </tr>
-        </thead>
-        <tbody>
-       
+        </thead>';
+    while($resultado = mysqli_fetch_row($consulta)){
+        echo '<tr>
+            <td>'.$resultado[0].'</td>
+            <td>'.$resultado[1].'</td>
+            <td>'.$resultado[2].'</td>
+            <td>'.$resultado[3].'</td>
+            <td>'.$resultado[5].'</td>
+            <td>'.$resultado[4].'</td>
+            <td>'.$resultado[6].'</td>  
+        </tr>';
+    }
+    echo '</tbody>';
 
+    ?>
     </table>
 
+    <table id="politicos" class="table table-bordered">
 
+<?php
+$base = "politicaargentina";
+$conexion = mysqli_connect("localhost","root","", $base);
+$consulta = "SELECT * from politicos";
+$consulta = mysqli_query($conexion, $consulta);
+
+echo '<thead>
+    <tr>
+        <th>Partido_ID</th>
+        <th>NombrePartido</th>
+        <th>Ideologia</th>
+        <th>Aniofundacion</th>
+        <th>SedeCentral</th>
+        <th>LiderActual</th>
+        <th>SitioWeb</th>   
+    </tr>
+    </thead>';
+while($resultado = mysqli_fetch_row($consulta)){
+    echo '<tr>
+        <td>'.$resultado[0].'</td>
+        <td>'.$resultado[1].'</td>
+        <td>'.$resultado[2].'</td>
+        <td>'.$resultado[3].'</td>
+        <td>'.$resultado[5].'</td>
+        <td>'.$resultado[4].'</td>
+        <td>'.$resultado[6].'</td>  
+    </tr>';
+}
+echo '</tbody>';
+
+?>
+</table>
 
 
 <?php include('template/pie.php'); ?>
